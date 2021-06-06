@@ -8,13 +8,9 @@ let leftIndex;
 let middleIndex;
 let rightIndex;
 
-
-
 let rounds = 25;
 
-
 let clicksCounter = 0;
-
 
 function BusMall(productName,source){
   this.productName = productName;
@@ -25,7 +21,6 @@ function BusMall(productName,source){
 }
 
 BusMall.allImages = [];
-
 
 new BusMall('bag','img/bag.jpg');
 new BusMall('banana','img/banana.jpg');
@@ -48,14 +43,10 @@ new BusMall('usb','img/usb.gif');
 new BusMall('water-can','img/water-can.jpg');
 new BusMall('wine-glass','img/wine-glass.jpg');
 
-
 function displayImages(){
   leftIndex = generateRandomIndex(); 
   middleIndex = generateRandomIndex();
   rightIndex = generateRandomIndex(); 
-  console.log(leftIndex);
-  console.log(middleIndex);
-  console.log(rightIndex);
 
   while(leftIndex === middleIndex || middleIndex === rightIndex || rightIndex === leftIndex){
     leftIndex = generateRandomIndex(); 
@@ -72,21 +63,13 @@ function displayImages(){
     BusMall.allImages[middleIndex].shown++;
     BusMall.allImages[rightIndex].shown++;
   }
-  console.log(BusMall.allImages[middleIndex].shown);
-
-
 }
 displayImages();
-
 
 function generateRandomIndex(){
   let randomIndex = Math.floor(Math.random() * BusMall.allImages.length);
   return randomIndex;
-
-                
 }
-
-
 leftElement.addEventListener('click',handleClick);
 middleElement.addEventListener('click',handleClick);
 rightElement.addEventListener('click',handleClick);
@@ -94,7 +77,6 @@ rightElement.addEventListener('click',handleClick);
 function handleClick(event){
     clicksCounter++;
 
-    console.log(event.target.id);
     if(rounds >= clicksCounter){
         if(event.target.id === 'left'){
           BusMall.allImages[leftIndex].likes++;
@@ -105,29 +87,17 @@ function handleClick(event){
         }
         displayImages();
     }else{
-      console.log(BusMall.allImages);
     gettingList();
     leftElement.removeEventListener('click',handleClick);
     middleElement.removeEventListener('click',handleClick);
     rightElement.removeEventListener('click',handleClick);
     }
-
   }
-function gettingList(){
+document.getElementById('result').onclick =function gettingList(){
   let ul = document.getElementById('List');
   for(let i = 0 ; i <BusMall.allImages.length; i++ ){
     let li = document.createElement('li');
     ul.appendChild(li);
     li.textContent = `${BusMall.allImages[i].productName} has ${BusMall.allImages[i].likes} likely to purchase, and ${BusMall.allImages[i].shown} shows`;
   }
-
 }
-
-// var button = document.getElementById("result");
-// button.addEventListener("click", onClick);
-
-// function onClick() {
-//   console.log("Clicked");
-//   button.removeEventListener("click", onClick);
-//   button.textContent = li.textContent = `${BusMall.allImages[i].productName} has ${BusMall.allImages[i].likes} likely to purchase, and ${BusMall.allImages[i].shown} shows`;
-// }
