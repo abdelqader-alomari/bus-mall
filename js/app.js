@@ -143,7 +143,7 @@ console.log(namesArr+ 'Names');
     data: {
       labels: namesArr,
       datasets: [{
-        label: '# of Votes',
+        label: '# of Likes',
         data: likesArr,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
