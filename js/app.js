@@ -24,9 +24,13 @@ function BusMall(productName, source) {
   this.likes = 0;
   this.shown = 0;
   BusMall.allImages.push(this);
-  namesArr.push(this.productName);
 }
 
+let clickedProducts = localStorage.getItem('Product');
+if (clickedProducts) {
+  let parsedProducts = JSON.parse(clickedProducts);
+  BusMall.allImages = parsedProducts;
+}else{
 BusMall.allImages = [];
 
 new BusMall('bag', 'img/bag.jpg');
@@ -49,6 +53,7 @@ new BusMall('unicorn', 'img/unicorn.jpg');
 new BusMall('usb', 'img/usb.gif');
 new BusMall('water-can', 'img/water-can.jpg');
 new BusMall('wine-glass', 'img/wine-glass.jpg');
+}
 
 function displayImages() {
   leftIndex = generateRandomIndex();
@@ -84,9 +89,7 @@ function generateRandomIndex() {
   let randomIndex = Math.floor(Math.random() * BusMall.allImages.length);
   return randomIndex;
 }
-// leftElement.addEventListener('click',handleClick);
-// middleElement.addEventListener('click',handleClick);
-// rightElement.addEventListener('click',handleClick);
+
 container.addEventListener('click', handleClick);
 let btnEl;
 
@@ -109,86 +112,33 @@ function handleClick(event) {
   } else {
     btnEl = document.getElementById('result');
     btnEl.addEventListener('click', handleViewing);
+    renderChart();
     container.removeEventListener('click', handleClick);
+    let stringifiedProducts = JSON.stringify(BusMall.allImages);
+    localStorage.setItem('Product', stringifiedProducts);
   }
 }
+
 function handleViewing() {
   gettingList();
-  console.log(namesArr)
   gettingChart();
   btnEl.removeEventListener('click', handleViewing);
-  console.log(likesArr);
-  console.log(showsArr);
 }
 
 function gettingList() {
   let ul = document.getElementById('List');
   for (let i = 0; i < BusMall.allImages.length; i++) {
-    likesArr.push(BusMall.allImages[i].likes);
-    showsArr.push(BusMall.allImages[i].shown);
     let li = document.createElement('li');
     ul.appendChild(li);
     li.textContent = `${BusMall.allImages[i].productName} has ${BusMall.allImages[i].likes} likely to purchase, and ${BusMall.allImages[i].shown} shows`;
   }
-  console.log(likesArr + 'test')
   document.getElementById("result").disabled = true;
 }
 
-function gettingChart() {
-  console.log(BusMall.allImages)
-console.log(namesArr+ 'Names');
-  var ctx = document.getElementById('Chart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: namesArr,
-      datasets: [{
-        label: '# of Likes',
-        data: likesArr,
-        backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      },{label: '# of shows',
-      data: showsArr,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+function renderChart() {
+  for (let i = 0; i < BusMall.allImages.length; i++) {
+    likesArr.push(BusMall.allImages[i].likes);
+    showsArr.push(BusMall.allImages[i].shown);
+    namesArr.push(BusMall.allImages[i].productName);
+  }
 }
