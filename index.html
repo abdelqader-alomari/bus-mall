@@ -10,6 +10,16 @@
 </head>
 <body>
     <header>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">//link for sweetalert.min.js</script>
+        <script>
+            // sweetalert for welcoming visitor
+        swal("Kindly enter your name:", {
+            content: "input",
+          })
+          .then((value) => {
+            swal(`You are so welcome ${value}`);
+          });
+          </script>
         <h1>Welcome to your Bus-Mall</h1>
         <h2>
             please click on what likely to purchase
@@ -34,8 +44,8 @@
     </main>
     <footer>
     </footer>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="js/app.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js">//link for chart.js from cdn</script>
+        <script src="js/app.js" defer>//defer use to connect two of Javascript files</script>
         <script src="js/chart.js"></script>
 </body>
 </html>
