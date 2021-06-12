@@ -22,7 +22,7 @@ You are also responsible for the look and feel of the app, so don’t forget a c
 
 ### Procedure of solving as steps:
 
-1. Create repo named bus-mall that contains: README.md, CSS(reset.css,style.css),JS(app.js,chart.js) and img/
+1. Create repo named bus-mall that contains: README.md, CSS(reset.css,style.css),JS(app.js,chart.js), .gitignore and img/
 2. Create .eslintrc file which is contain a copy of eslintrc.json file from our class repo.
 3. Fill reset.css from https://meyerweb.com/eric/tools/css/reset/ ,link reset.css then style.css in index.html
 4. Download all the images that exist in assets directory from out class repo and put it in img directory.
@@ -37,3 +37,4 @@ You are also responsible for the look and feel of the app, so don’t forget a c
 13. Add chart.js and connect it to index.html, or work on single js file.
 14. Connect the chart which show after finish rounds and click on button.
 15. Make styling using CSS to enhance the appearance.
+16. Create local storage that stores product names, source, likes(clicks), and shown(views).
